@@ -9,5 +9,7 @@ lab-01_makefile tests:
   after_script:
     - !reference [.bootstrap, after_script]
   script:
+    - 'chmod 700 "/tmp/ci_$CI_JOB_ID/private-tests/check-git-up-to-date"' # ???
     - '"/tmp/ci_$CI_JOB_ID/private-tests/check-git-up-to-date" lab-01_makefile/README.md lab-01_makefile/tests/'
+    - 'chmod 700 "/tmp/ci_$CI_JOB_ID/labs/run-tests"' # ???
     - 'PRIVATE_SUITE_PATH="/tmp/ci_$CI_JOB_ID/private-tests/lab-01_makefile" "/tmp/ci_$CI_JOB_ID/labs/run-tests" --report --report-path tests-report.xml --output /tmp/ci_$CI_JOB_ID/output lab-01_makefile'
