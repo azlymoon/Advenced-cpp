@@ -1,0 +1,36 @@
+stages:
+  - test # this is a default one
+
+default:
+  tags:
+    - year-2022-2023
+    - docker
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - "tests-report.xml"
+    paths:
+      - "tests-report.xml"
+
+variables:
+  GIT_DEPTH: "10000"
+  GIT_SUBMODULE_STRATEGY: "recursive"
+
+.bootstrap:
+  image: alpine/git
+  tags:
+    - docker
+  before_script: &bootstrap_script
+    - 'mkdir -p "/tmp/ci_$CI_JOB_ID"'
+    - 'git clone --branch "$CPP_CI_USE_BRANCH" "$CPP_LABS_URL" "/tmp/ci_$CI_JOB_ID/labs"'
+    - 'git clone --branch "$CPP_CI_USE_BRANCH" --depth 1 "$CPP_PRIVATE_TESTS_URL" "/tmp/ci_$CI_JOB_ID/private-tests"'
+  after_script: &finalize_script
+    - 'git -C "/tmp/ci_$CI_JOB_ID/private-tests" rev-parse HEAD > /tmp/ci_$CI_JOB_ID/private-tests.rev'
+    - 'rm -rf "/tmp/ci_$CI_JOB_ID/private-tests"'
+    - 'git -C "/tmp/ci_$CI_JOB_ID/labs" rev-parse HEAD > /tmp/ci_$CI_JOB_ID/labs.rev'
+    - 'rm -rf "/tmp/ci_$CI_JOB_ID/labs"'
+
+include:
+  - 'ci-conf/lab-*.yaml'
+  - 'ci-conf/hw-*.yaml'
