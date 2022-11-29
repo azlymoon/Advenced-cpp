@@ -23,6 +23,10 @@ char* my_strcat(char* destination, const char* source) {
 }
 
 int my_strcmp(const char* string1, const char* string2) {
-	while (*string1 && *string2 && *string1++ == *string2++);
+	while (*string1) {
+		if (*string1 != *string2)
+			break;
+		string1++, string2++;
+	}
 	return *(const unsigned char*)string1 - *(const unsigned char*)string2;
 }
