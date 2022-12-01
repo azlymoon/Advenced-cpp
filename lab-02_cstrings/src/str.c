@@ -5,7 +5,6 @@
 char* my_strcpy(char* destination, const char* source) {
 	char* temp = destination;
 	while ((*destination++ = *source++));
-	*destination = '\0';
 	return temp;
 }
 
