@@ -39,8 +39,10 @@ void test_my_strlen(const char* test_name, const char* src_str)
 	}
 }
 
-void test_my_strcat(const char* test_name, char* res, const char* src_str, const char* ans)
+void test_my_strcat(const char* test_name, char* dest, const char* src_str, const char* ans)
 {
+	char res[40] = {};
+	strcpy(res, dest);
 	int retval_ok = my_strcat(res, src_str) == res;
 	int cat_ok = strcmp(res, ans) == 0;
 	if (retval_ok && cat_ok) {
@@ -91,11 +93,10 @@ void strlen_suit() {
 
 void strcat_suit() {
 	printf("====== strcat ======\n");
-	char res[40] = {};
-	test_my_strcat("Empty", res, "", "");
-	test_my_strcat("Single", res, "a", "a");
-	test_my_strcat("Double", res, "ab", "aab");
-	test_my_strcat("Multi", res, "abc", "aababc");
+	test_my_strcat("Empty", "", "", "");
+	test_my_strcat("Single", "", "a", "a");
+	test_my_strcat("Double", "a", "ab", "aab");
+	test_my_strcat("Multi", "aab", "abc", "aababc");
 }
 
 void strcmp_suit() {
@@ -104,4 +105,6 @@ void strcmp_suit() {
 	test_my_strcmp("Equal", "a", "a");
 	test_my_strcmp("Left larger", "ab", "a");
 	test_my_strcmp("Right large", "ab", "abc");
+	test_my_strcmp("Empty - No Empty", "", "abc");
+	test_my_strcmp("Part of another", "bc", "abcd");
 }
