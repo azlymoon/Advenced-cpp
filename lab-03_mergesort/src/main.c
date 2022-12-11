@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 			if (i != elements - 1)
 				printf("%d ", *(array + i));
 			else
-				printf("%d", *(array + i));
+				printf("%d\n", *(array + i));
 		free(array);
 	}
 	else if (strcmp(argv[1], "char") == 0) {
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
 			if (i != elements - 1)
 				printf("%c ", *(array + i * element_size));
 			else
-				printf("%c", *(array + i * element_size));
+				printf("%c\n", *(array + i * element_size));
 		free(array);
 	}
 	else if (strcmp(argv[1], "str") == 0) {
@@ -67,7 +67,7 @@ int main(int argc, char *argv[]) {
 			if (i != elements - 1)
 				printf("%s ", *(array + i));
 			else
-				printf("%s", *(array + i));
+				printf("%s\n", *(array + i));
 		free(array);
 	}
 
