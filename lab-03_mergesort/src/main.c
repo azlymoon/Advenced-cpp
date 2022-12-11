@@ -30,7 +30,6 @@ int main(int argc, char *argv[]) {
 		}
 		for (size_t i = 0; i < elements; i++)
 			printf("%d ", *(array + i));
-		printf("\n");
 		free(array);
 	}
 	else if (strcmp(argv[1], "char") == 0) {
@@ -45,7 +44,6 @@ int main(int argc, char *argv[]) {
 		}
 		for (size_t i = 0; i < elements; i++)
 			printf("%c ", *(array + i * element_size));
-		printf("\n");
 		free(array);
 	}
 	else if (strcmp(argv[1], "str") == 0) {
@@ -61,7 +59,6 @@ int main(int argc, char *argv[]) {
 		}
 		for (size_t i = 0; i < elements; i++)
 			printf("%s ", *(array + i));
-		printf("\n");
 		free(array);
 	}
 
