@@ -8,7 +8,7 @@ int int_comparator(const void* a, const void* b) {
 	return *(int*)a - *(int*)b;
 }
 int char_comparator(const void* a, const void* b) { 
-	return strcmp((char*)a, (char*)b); 
+	return *(char*)a - *(char*)b;
 }
 int str_comparator(const void* a, const void* b) { 
 	return strcmp(*(char**)a, *(char**)b);
