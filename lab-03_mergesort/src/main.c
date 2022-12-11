@@ -28,8 +28,9 @@ int main(int argc, char *argv[]) {
 			printf("Error: memory allocation failed.");
 			return -1;
 		}
-		for (size_t i = 0; i < elements; i++)
+		for (size_t i = 0; i < elements - 1; i++)
 			printf("%d ", *(array + i));
+		printf("%d", *(array + elements - 1));
 		free(array);
 	}
 	else if (strcmp(argv[1], "char") == 0) {
@@ -42,8 +43,9 @@ int main(int argc, char *argv[]) {
 			printf("Error: memory allocation failed.");
 			return -1;
 		}
-		for (size_t i = 0; i < elements; i++)
+		for (size_t i = 0; i < elements - 1; i++)
 			printf("%c ", *(array + i * element_size));
+		printf("%c", *(array + elements - 1));
 		free(array);
 	}
 	else if (strcmp(argv[1], "str") == 0) {
@@ -57,8 +59,9 @@ int main(int argc, char *argv[]) {
 			printf("Error: memory allocation failed.");
 			return -1;
 		}
-		for (size_t i = 0; i < elements; i++)
+		for (size_t i = 0; i < elements - 1; i++)
 			printf("%s ", *(array + i));
+		printf("%s", *(array + elements - 1));
 		free(array);
 	}
 
