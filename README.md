@@ -212,7 +212,7 @@
    ```
 1. Перейдите в этот репозиторий:
    ```sh
-   cd labs-SURNAME
+   cd SURNAME
    # или, если указали
    cd my-labs-repo
    ```
@@ -238,7 +238,7 @@
    ```
 1. Включите в свой *master* изменения из *upstream/master*:
    ```sh
-   git merge upstream/master
+   git merge upstream/master --allow-unrelated-histories
    ```
    Может появиться редактор для сообщения (но если вы действовали точно по инструкции не появится),
    можно не меняя ничего сохранить и выйти (в Vim достаточно нажать по очереди: `:`, `w`, `q`,
