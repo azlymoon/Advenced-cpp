@@ -1,8 +1,5 @@
-#include "../include/mergesort.h"
+#include "mergesort.h"
 #include <stdlib.h>
-#include <stdio.h>
-#include <stddef.h>
-#include <assert.h>
 
 int merge(
     size_t element_size, 
@@ -54,17 +51,19 @@ int mergesort(
     size_t elements, size_t element_size,
     int (*comparator)(const void*, const void*)
 ) {
+    int status;
     char* arr = array;
     size_t m = elements / 2;
     if (elements <= 1)
         return 0;
-    mergesort(arr, m, element_size, comparator);
-    mergesort(arr + m * element_size, elements - m, element_size, comparator);
+    status = mergesort(arr, m, element_size, comparator);
+    status = mergesort(arr + m * element_size, elements - m, element_size, comparator);
+    if (status == -1)
+        return -1;
     char* left = arr;
     char* mid = arr + (elements / 2) * element_size;
     char* right = arr + elements * element_size;
-    if (merge(element_size, left, mid, right, comparator) == -1) {
+    if (merge(element_size, left, mid, right, comparator) == -1)
         return -1;
-    }
     return 0;
 }
