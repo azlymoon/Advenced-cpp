@@ -38,15 +38,17 @@ void remove_point(struct intrusive_list* list, int x, int y) {
 void show_all_points(struct intrusive_list* list) {
     struct intrusive_node* cur_node = list->head;
     struct point* cur_point;
-    size_t size_list = get_length(list);
-    for (size_t i = 0; i < size_list - 1; i++) {
+    int size_list = (int)get_length(list);
+    for (int i = 0; i < size_list - 1; i++) {
         cur_point = container_of(cur_node, struct point, node);
         printf("(%d %d) ", cur_point->x, cur_point->y);
         cur_node = cur_node->next;
     }
-    cur_point = container_of(cur_node, struct point, node);
-    printf("(%d %d)", cur_point->x, cur_point->y);
-    cur_node = cur_node->next;
+    if (cur_node != NULL) {
+        cur_point = container_of(cur_node, struct point, node);
+        printf("(%d %d)", cur_point->x, cur_point->y);
+        cur_node = cur_node->next;
+    }
     printf("\n");
 }
 
@@ -63,12 +65,17 @@ void remove_all_points(struct intrusive_list* list) {
 }
 
 int main() {
+    //struct intrusive_list l;
+    //init_list(&l);
+    //show_all_points(&l);
+    //return 0;
+
     struct intrusive_list l;
     int x, y;
-    char command[10];
+    char command[100];
     init_list(&l);
     while (1) {
-        scanf("%6s", command);
+        scanf("%50s", command);
         if (strcmp(command, "add") == 0) {
             scanf("%d %d", &x, &y);
             add_point(&l, x, y);
