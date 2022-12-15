@@ -88,11 +88,11 @@ int main() {
             printf("%d\n", get_length(&l));
         }
         else if (strcmp(command, "exit") == 0) {
-            exit(0);
+            remove_all_points(&l);
+            return 0;
         }
         else {
             printf("Unknown command\n");
         }
     }
-    return 0;
 }
