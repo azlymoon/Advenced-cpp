@@ -39,11 +39,14 @@ void show_all_points(struct intrusive_list* list) {
     struct intrusive_node* cur_node = list->head;
     struct point* cur_point;
     size_t size_list = get_length(list);
-    for (size_t i = 0; i < size_list; i++) {
+    for (size_t i = 0; i < size_list - 1; i++) {
         cur_point = container_of(cur_node, struct point, node);
         printf("(%d %d) ", cur_point->x, cur_point->y);
         cur_node = cur_node->next;
     }
+    cur_point = container_of(cur_node, struct point, node);
+    printf("(%d %d)", cur_point->x, cur_point->y);
+    cur_node = cur_node->next;
     printf("\n");
 }
 
