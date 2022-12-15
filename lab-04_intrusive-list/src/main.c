@@ -27,7 +27,9 @@ void remove_point(struct intrusive_list* list, int x, int y) {
         if (cur_point->x == x && cur_point->y == y) {
             remove_node(list, cur_node);
             free(cur_point);
-            cur_node = list->head->next;
+            if (list->head != NULL) {
+                cur_node = list->head->next;
+            }
         }
         else {
             cur_node = cur_node->next;
@@ -65,11 +67,6 @@ void remove_all_points(struct intrusive_list* list) {
 }
 
 int main() {
-    //struct intrusive_list l;
-    //init_list(&l);
-    //show_all_points(&l);
-    //return 0;
-
     struct intrusive_list l;
     int x, y;
     char command[100];
