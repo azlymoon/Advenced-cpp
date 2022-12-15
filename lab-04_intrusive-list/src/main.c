@@ -64,17 +64,16 @@ void remove_all_points(struct intrusive_list* list) {
 
 int main() {
     struct intrusive_list l;
-    init_list(&l);
+    int x, y;
     char command[10];
+    init_list(&l);
     while (1) {
-        scanf("%10s", command);
+        scanf("%6s", command);
         if (strcmp(command, "add") == 0) {
-            int x, y;
             scanf("%d %d", &x, &y);
             add_point(&l, x, y);
         }
         else if (strcmp(command, "rm") == 0) {
-            int x, y;
             scanf("%d %d", &x, &y);
             remove_point(&l, x, y);
         }
