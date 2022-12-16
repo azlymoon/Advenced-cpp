@@ -29,13 +29,14 @@ void add_node(struct intrusive_list* list, struct intrusive_node* node) {
 }
 
 void remove_node(struct intrusive_list* list, struct intrusive_node* node) {
+	size_t size_list = get_length(list);
 	if (list->head == node) {
 		list->head = node->next;
 	}
-	if (node == list->head) {
+	if (size_list == 1) {
 		list->head = NULL;
 	}
-	else if (node->next == list->head) {
+	else if (size_list == 2) {
 		list->head->next = list->head;
 		list->head->prev = list->head;
 	}
