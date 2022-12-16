@@ -201,9 +201,10 @@
 
 1. Сделайте локальную копию своего приватного репозитория. Ссылку можно найти нажав кнопку *Clone*.
    ```sh
-   git clone https://gitlab.com/cpp_2022/students/labs-SURNAME.git
+   git clone git clone https://git.miem.hse.ru/cpp_2022/students/SURNAME.git
+   
    # или если вы настроили SSH-ключ:
-   git clone git@gitlab.com:cpp_2022/students/labs-SURNAME.git
+   git clone git@git.miem.hse.ru:cpp_2022/students/SURNAME.git
    ```
    Можно указать ещё одним аргументом где именно делать репозиторий вместо `./my-labs-repo`:
    ```sh
@@ -211,7 +212,7 @@
    ```
 1. Перейдите в этот репозиторий:
    ```sh
-   cd labs-SURNAME
+   cd SURNAME
    # или, если указали
    cd my-labs-repo
    ```
@@ -237,7 +238,7 @@
    ```
 1. Включите в свой *master* изменения из *upstream/master*:
    ```sh
-   git merge upstream/master
+   git merge upstream/master --allow-unrelated-histories
    ```
    Может появиться редактор для сообщения (но если вы действовали точно по инструкции не появится),
    можно не меняя ничего сохранить и выйти (в Vim достаточно нажать по очереди: `:`, `w`, `q`,
