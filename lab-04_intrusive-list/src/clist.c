@@ -35,7 +35,7 @@ void remove_node(struct intrusive_list* list, struct intrusive_node* node) {
 	if (node == list->head) {
 		list->head = NULL;
 	}
-	else if (node->prev == list->head) {
+	else if (node->next == list->head) {
 		list->head->next = list->head;
 		list->head->prev = list->head;
 	}
