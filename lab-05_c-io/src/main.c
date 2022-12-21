@@ -39,5 +39,7 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
+	remove_all_points(&l);
+
 	return 0;
 }
