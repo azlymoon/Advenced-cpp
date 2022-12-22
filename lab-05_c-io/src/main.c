@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
 			i += 1;
 			char* format = argv[i];
 			apply(&l, print, format);
+			printf("\n");
 		}
 		else if (strcmp(argv[i], "count") == 0) {
 			int size_list = 0;
