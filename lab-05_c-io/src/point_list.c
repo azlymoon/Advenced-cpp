@@ -34,10 +34,11 @@ void remove_point(struct intrusive_list* list, int x, int y) {
 
 void write_all_points_txt_file(struct intrusive_list* list, char* path) {
     FILE* out = fopen(path, "w");
+    int size_list = (int)get_length(list);
+    if (size_list == 0)
+        return;
     struct intrusive_node* cur_node = list->head->prev;
     struct point* cur_point;
-    int size_list = (int)get_length(list);
-    printf("size_list: %d\n", size_list);
     for (int i = 0; i < size_list; i++) {
         cur_point = container_of(cur_node, struct point, node);
         fprintf(out, "%d %d\n", cur_point->x, cur_point->y);
@@ -60,11 +61,9 @@ void remove_all_points(struct intrusive_list* list) {
 
 void read_txt_file(struct intrusive_list* list, char* path) {
     FILE* in = fopen(path, "r");
-    while (!feof(in)) {
-        int x, y;
-        fscanf(in, "%d %d", &x, &y);
+    int x, y;
+    while (fscanf(in, "%d %d", &x, &y) != EOF) {
         add_point(list, x, y);
-
         if (ferror(in)) {
             printf("Error read file");
             exit(1);
@@ -86,19 +85,26 @@ void count(struct intrusive_node* cur_node, void* data) {
     }
 }
 
+int transform(unsigned char* bin) {
+    int param = ((unsigned int)bin[0]) | (((unsigned int)bin[1]) << 8) | (((unsigned int)bin[2]) << 16);
+    if (param & (1 << 23)) {
+        param -= 1;
+        param ^= 16777215;
+        param *= -1;
+    }
+    return param;
+}
+
 void read_bin_file(struct intrusive_list* list, char* path) {
     FILE* in = fopen(path, "rb");
-    int x, y, t1, t2;
-    char* tmp_arr = malloc(sizeof(char) * 3);
+    int x, y;
+    unsigned char* tmp_arr = malloc(sizeof(unsigned char) * 3);
     assert(tmp_arr);
-    while (!feof(in)) {
-        t1 = fread(tmp_arr, 3, 1, in);
-        x = *(int*)(tmp_arr);
-        t2 = fread(tmp_arr, 3, 1, in);
-        y = *(int*)(tmp_arr);
-        if (t1 + t2 == 2) {
-            add_point(list, x, y);
-        }
+    while (fread(tmp_arr, 3, 1, in)) {
+        x = transform(tmp_arr);
+        fread(tmp_arr, 3, 1, in);
+        y = transform(tmp_arr);
+        add_point(list, x, y);
 
         if (ferror(in)) {
             printf("Error read file");
@@ -112,9 +118,11 @@ void read_bin_file(struct intrusive_list* list, char* path) {
 
 void write_all_points_bin_file(struct intrusive_list* list, char* path) {
     FILE* out = fopen(path, "wb");
+    int size_list = (int)get_length(list);
+    if (size_list == 0)
+        return;
     struct intrusive_node* cur_node = list->head->prev;
     struct point* cur_point;
-    int size_list = (int)get_length(list);
     int* tmp_arr = malloc(sizeof(int));
     assert(tmp_arr);
     for (int i = 0; i < size_list; i++) {
