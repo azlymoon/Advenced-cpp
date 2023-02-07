@@ -6,7 +6,9 @@
 #include <stdlib.h>
 
 void load_bmp(char* in_bmp, bmp_t* bmp) {
-	FILE* in = fopen(in_bmp, "rb");
+	FILE* in;
+	if ((in = fopen(in_bmp, "rb")) == NULL)
+		exit(1);
 	fseek(in, 0, SEEK_SET);
 	fread(&bmp->fileheader, sizeof(bmp_fileheader_t), 1, in);
 	fread(&bmp->infoheader, sizeof(bmp_infoheader_t), 1, in);
@@ -26,7 +28,6 @@ void load_bmp(char* in_bmp, bmp_t* bmp) {
 		fread(data, sizeof(pixel_t), w, in);
 		fseek(in, whitespace, SEEK_CUR);
 		data += sizeof(pixel_t) * w;
-
 		if (ferror(in)) {
 			exit(1);
 		}
