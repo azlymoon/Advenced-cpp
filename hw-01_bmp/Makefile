@@ -1,5 +1,5 @@
 
-CFLAGS ?= -Wall -Wextra -Werror -I include/ -g -fno-stack-protector -fsanitize=address
+CFLAGS ?= -Wall -Wextra -Werror -I include/ -g -fno-stack-protector
 
 
 hw-01_bmp: obj/main.o obj/bmp.o obj
