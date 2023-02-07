@@ -15,7 +15,6 @@ void load_bmp(char* in_bmp, bmp_t* bmp) {
 
 	int32_t w = bmp->infoheader.biWidth;
 	int32_t h = bmp->infoheader.biHeight;
-	//int whitespace = (bmp->fileheader.bfSize - bmp->fileheader.bfOffBits - w * h * 3) / h;
 	int whitespace = (4 - bmp->infoheader.biWidth * 3 % 4) % 4;
 
 	fseek(in, bmp->fileheader.bfOffBits, SEEK_SET);
@@ -33,25 +32,6 @@ void load_bmp(char* in_bmp, bmp_t* bmp) {
 			exit(1);
 		}
 	}
-
-	// Вывод информации о файле
-	//printf("%d %d\n", w, h);
-	//printf("fileheader: %d %d %d %d %d\n",
-	//	bmp->fileheader.bfOffBits, bmp->fileheader.bfReserved1,
-	//	bmp->fileheader.bfReserved2, bmp->fileheader.bfSize, bmp->fileheader.bfType);
-	//printf("infoheader: %d %d %d %d %d %d %d %d %d %d %d\n",
-	//	bmp->infoheader.biBitCount, bmp->infoheader.biClrImportant,
-	//	bmp->infoheader.biClrUsed, bmp->infoheader.biCompression,
-	//	bmp->infoheader.biHeight, bmp->infoheader.biPlanes, bmp->infoheader.biSize,
-	//	bmp->infoheader.biSizeImage, bmp->infoheader.biWidth, bmp->infoheader.biXPelsPerMeter,
-	//	bmp->infoheader.biYPelsPerMeter);
-	//printf("\n");
-	//printf("%d\n", h);
-	//for (int32_t i = 0; i < h; i++) {
-	//	//for (int32_t j = 0; j < w; j++) {
-	//	printf("%d%d%d ", bmp->rect.pixels[0][i].r, bmp->rect.pixels[0][i].g, bmp->rect.pixels[0][i].b);
-	//	//}
-	//}
 	fclose(in);
 }
 
@@ -66,12 +46,9 @@ rectangle_t crop(bmp_t* bmp, int32_t x, int32_t y, int32_t w, int32_t h){
 	for (int32_t i = 0; i < h; i++) {
 		pixels[i] = data;
 		for (int32_t j = 0; j < w; j++) {
-			//printf("{%d, %d} ", bmp->infoheader.biHeight - h - y + i, x + j);
 			*data = bmp->rect.pixels[bmp->infoheader.biHeight - h - y + i][x + j];
-			//*data = bmp->rect.pixels[x + i][y + j];
 			data++;
 		}
-		//printf("\n");
 	}
 	return rect_new;
 }
@@ -88,7 +65,6 @@ rectangle_t rotate(rectangle_t rect, int32_t w, int32_t h) {
 		pixels[i] = data;
 		for (int32_t j = 0; j < w_new; j++) {
 			*data = rect.pixels[j][w - i - 1];
-			//*data = rect.pixels[j][i];
 			data++;
 		}
 	}
@@ -106,30 +82,8 @@ void save_bmp(char* out_bmp, bmp_t* bmp) {
 
 	int32_t w = bmp->infoheader.biWidth;
 	int32_t h = bmp->infoheader.biHeight;
-	//int whitespace = (bmp->fileheader.bfSize - bmp->fileheader.bfOffBits - w * h * 3) / h;
 	int whitespace = (4 - bmp->infoheader.biWidth * 3 % 4) % 4;
 	unsigned char null = 0;
-
-
-	//printf("%d\n", h);
-	//printf("\n");
-	//for (int32_t i = 0; i < h; i++) {
-	//	//for (int32_t j = 0; j < w; j++) {
-	//	printf("%d%d%d ", bmp->rect.pixels[0][i].r, bmp->rect.pixels[0][i].g, bmp->rect.pixels[0][i].b);
-	//	//}
-	//}
-
-	// Вывод информации о файле
-	//printf("%d %d\n", w, h);
-	//printf("fileheader: %d %d %d %d %d\n",
-	//	bmp->fileheader.bfOffBits, bmp->fileheader.bfReserved1,
-	//	bmp->fileheader.bfReserved2, bmp->fileheader.bfSize, bmp->fileheader.bfType);
-	//printf("infoheader: %d %d %d %d %d %d %d %d %d %d %d\n",
-	//	bmp->infoheader.biBitCount, bmp->infoheader.biClrImportant,
-	//	bmp->infoheader.biClrUsed, bmp->infoheader.biCompression,
-	//	bmp->infoheader.biHeight, bmp->infoheader.biPlanes, bmp->infoheader.biSize,
-	//	bmp->infoheader.biSizeImage, bmp->infoheader.biWidth, bmp->infoheader.biXPelsPerMeter,
-	//	bmp->infoheader.biYPelsPerMeter);
 
 	fseek(out, bmp->fileheader.bfOffBits, SEEK_SET);
 	for (int i = 0; i < h; i++) {
@@ -146,18 +100,11 @@ bmp_t crop_rotate(bmp_t* bmp, int32_t x, int32_t y, int32_t w, int32_t h) {
 	bmp_t bmp_new;
 	bmp_new.fileheader = bmp->fileheader;
 	bmp_new.infoheader = bmp->infoheader;
-	//printf("%d, %d\n", w, h);
 	bmp_new.infoheader.biWidth = h;
 	bmp_new.infoheader.biHeight = w;
 	int whitespace = (4 - bmp_new.infoheader.biWidth * 3 % 4) % 4;
-	//printf("whitespace: %d\n", whitespace);
 	bmp_new.fileheader.bfSize = bmp->fileheader.bfOffBits + w * h * 3 + whitespace * bmp_new.infoheader.biHeight;
 	bmp_new.infoheader.biSizeImage = w * h * 3 + whitespace * bmp_new.infoheader.biHeight;
-
-	// Специальная проверка тестов
-	//bmp_new.infoheader.biXPelsPerMeter = 3780;
-	//bmp_new.infoheader.biYPelsPerMeter = 3780;
-	//bmp_new.infoheader.biSizeImage = 0;
 
 	bmp_new.rect = rect;
 	return bmp_new;
