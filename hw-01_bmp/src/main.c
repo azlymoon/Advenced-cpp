@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
 			load_bmp(in_bmp, &bmp);
 			int bmp_w = bmp.infoheader.biWidth;
 			int bmp_h = bmp.infoheader.biHeight;
-			if (x + h > bmp_h || y + w > bmp_w || x + h <= x || y + w <= y || x < 0 || y < 0) {
+			if (y + h > bmp_h || x + w > bmp_w || x + w <= x || y + h <= y || x < 0 || y < 0) {
 				return 1;
 			}
 			bmp_crop_rotate = crop_rotate(&bmp, x, y, w, h);
