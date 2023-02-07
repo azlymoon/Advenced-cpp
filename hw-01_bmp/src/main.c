@@ -6,7 +6,7 @@
 int main(int argc, char* argv[]) {
 	bmp_t bmp;
 	bmp_t bmp_crop_rotate;
-	if (argc >= 7) {
+	if (argc >= 8) {
 		if (strcmp(argv[1], "crop-rotate") == 0) {
 			char* in_bmp = argv[2];
 			char* out_bmp = argv[3];
