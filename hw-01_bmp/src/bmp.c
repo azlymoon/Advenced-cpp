@@ -106,7 +106,7 @@ void save_bmp(char* out_bmp, bmp_t* bmp) {
 	int32_t w = bmp->infoheader.biWidth;
 	int32_t h = bmp->infoheader.biHeight;
 	int whitespace = (bmp->fileheader.bfSize - bmp->fileheader.bfOffBits - w * h * 3) / h;
-	int8_t null = 0;
+	//int8_t null = 0;
 
 
 	//printf("%d\n", h);
@@ -133,7 +133,7 @@ void save_bmp(char* out_bmp, bmp_t* bmp) {
 	for (int i = 0; i < h; i++) {
 		fwrite(bmp->rect.pixels[i], sizeof(pixel_t), w, out);
 		for (int j = 0; j < whitespace; j++) {
-			fwrite(&null, sizeof(int8_t), 1, out);
+			fwrite("\0", sizeof(int8_t), 1, out);
 		}
 	}
 }
