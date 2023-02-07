@@ -25,6 +25,9 @@ int main(int argc, char* argv[]) {
 			free_bmp(&bmp);
 			free_bmp(&bmp_crop_rotate);
 		}
+		else {
+			return 1;
+		}
 	}
 	else {
 		return 1;

@@ -152,9 +152,9 @@ bmp_t crop_rotate(bmp_t* bmp, int32_t x, int32_t y, int32_t w, int32_t h) {
 	bmp_new.fileheader.bfSize = bmp->fileheader.bfOffBits + w*h*3 + whitespace * bmp_new.infoheader.biHeight;
 
 	// Специальная проверка тестов
-	bmp_new.infoheader.biXPelsPerMeter = 3780;
-	bmp_new.infoheader.biYPelsPerMeter = 3780;
-	bmp_new.infoheader.biSizeImage = 0;
+	//bmp_new.infoheader.biXPelsPerMeter = 3780;
+	//bmp_new.infoheader.biYPelsPerMeter = 3780;
+	//bmp_new.infoheader.biSizeImage = 0;
 
 	bmp_new.rect = rect;
 	return bmp_new;
