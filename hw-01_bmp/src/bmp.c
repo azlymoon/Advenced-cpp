@@ -143,7 +143,7 @@ bmp_t crop_rotate(bmp_t* bmp, int32_t x, int32_t y, int32_t w, int32_t h) {
 	//printf("%d, %d\n", w, h);
 	bmp_new.infoheader.biWidth = h;
 	bmp_new.infoheader.biHeight = w;
-	int whitespace = 4 - bmp_new.infoheader.biWidth * 3 % 4;
+	int whitespace = (4 - bmp_new.infoheader.biWidth * 3 % 4) % 4;
 	//printf("whitespace: %d\n", whitespace);
 	bmp_new.fileheader.bfSize = bmp->fileheader.bfOffBits + w*h*3 + whitespace * bmp_new.infoheader.biHeight;
 	bmp_new.rect = rect;
