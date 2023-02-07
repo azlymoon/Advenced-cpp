@@ -18,9 +18,6 @@ int main(int argc, char* argv[]) {
 			int bmp_w = bmp.infoheader.biWidth;
 			int bmp_h = bmp.infoheader.biHeight;
 			if (x + h > bmp_h || y + w > bmp_w || x + h <= x || y + w <= y || x < 0 || y < 0) {
-				printf("%d\n", argc);
-
-				printf("Wrong arguments");
 				return 1;
 			}
 			bmp_crop_rotate = crop_rotate(&bmp, x, y, w, h);
@@ -30,7 +27,6 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	else {
-		printf("Wrong arguments");
 		return 1;
 	}
 

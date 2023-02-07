@@ -28,7 +28,6 @@ void load_bmp(char* in_bmp, bmp_t* bmp) {
 		data += sizeof(pixel_t) * w;
 
 		if (ferror(in)) {
-			printf("Error read file");
 			exit(1);
 		}
 	}
