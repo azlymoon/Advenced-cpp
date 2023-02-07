@@ -15,7 +15,8 @@ void load_bmp(char* in_bmp, bmp_t* bmp) {
 
 	int32_t w = bmp->infoheader.biWidth;
 	int32_t h = bmp->infoheader.biHeight;
-	int whitespace = (bmp->fileheader.bfSize - bmp->fileheader.bfOffBits - w * h * 3) / h;
+	//int whitespace = (bmp->fileheader.bfSize - bmp->fileheader.bfOffBits - w * h * 3) / h;
+	int whitespace = (4 - bmp->infoheader.biWidth * 3 % 4) % 4;
 
 	fseek(in, bmp->fileheader.bfOffBits, SEEK_SET);
 	void* data = malloc(sizeof(pixel_t) * w * h);
@@ -105,7 +106,8 @@ void save_bmp(char* out_bmp, bmp_t* bmp) {
 
 	int32_t w = bmp->infoheader.biWidth;
 	int32_t h = bmp->infoheader.biHeight;
-	int whitespace = (bmp->fileheader.bfSize - bmp->fileheader.bfOffBits - w * h * 3) / h;
+	//int whitespace = (bmp->fileheader.bfSize - bmp->fileheader.bfOffBits - w * h * 3) / h;
+	int whitespace = (4 - bmp->infoheader.biWidth * 3 % 4) % 4;
 	//int8_t null = 0;
 
 
