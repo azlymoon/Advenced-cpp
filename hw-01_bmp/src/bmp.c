@@ -67,7 +67,7 @@ rectangle_t crop(bmp_t* bmp, int32_t x, int32_t y, int32_t w, int32_t h){
 		pixels[i] = data;
 		for (int32_t j = 0; j < w; j++) {
 			//printf("{%d, %d} ", bmp->infoheader.biHeight - h - y + i, x + j);
-			*data = bmp->rect.pixels[bmp->infoheader.biHeight - h - y + i][x + j];
+			*data = bmp->rect.pixels[bmp->infoheader.biHeight - y - i - 1][x + j];
 			//*data = bmp->rect.pixels[x + i][y + j];
 			data++;
 		}
@@ -87,7 +87,7 @@ rectangle_t rotate(rectangle_t rect, int32_t w, int32_t h) {
 	for (int32_t i = 0; i < h_new; i++) {
 		pixels[i] = data;
 		for (int32_t j = 0; j < w_new; j++) {
-			*data = rect.pixels[j][w - i - 1];
+			*data = rect.pixels[w - j - 1][h - i - 1];
 			//*data = rect.pixels[j][i];
 			data++;
 		}
