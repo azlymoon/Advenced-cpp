@@ -19,7 +19,6 @@ MyVector::MyVector(size_t init_capacity) {
 
 void MyVector::set(size_t index, int value) {
 	this->_data[index] = value;
-	this->_size++;
 }
 
 int MyVector::get(size_t index) {
