@@ -5,7 +5,7 @@ MyVector::MyVector() {
 	this->_capacity = 2;
 	this->_size = 0;
 	this->_data = new int[this->_capacity];
-	for (int i = 0; i < this->_capacity; i++)
+	for (size_t i = 0; i < this->_capacity; i++)
 		this->_data[i] = 0;
 }
 
@@ -13,7 +13,7 @@ MyVector::MyVector(size_t init_capacity) {
 	this->_capacity = init_capacity;
 	this->_size = 0;
 	this->_data = new int[this->_capacity];
-	for (int i = 0; i < this->_capacity; i++)
+	for (size_t i = 0; i < this->_capacity; i++)
 		this->_data[i] = 0;
 }
 
