@@ -1,5 +1,5 @@
 
-CFLAGS ?= -std=c++17 -Wall -Wextra -Werror -I include/ -g -fno-stack-protector -fsanitize=address
+CFLAGS ?= -std=c++17 -Wall -Wextra -Werror -I include/ -g -fno-stack-protector
 
 lab-06_int-vector: obj/main.o obj/my_vector.o obj 
 	g++ $(CFLAGS) obj/main.o obj/my_vector.o -o lab-06_int-vector
