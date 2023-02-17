@@ -100,5 +100,5 @@ void MyVector::resize(size_t new_size) {
 }
 
 MyVector::~MyVector() {
-	delete this->_data;
+	delete[] this->_data;
 }
