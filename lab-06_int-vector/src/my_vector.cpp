@@ -38,7 +38,7 @@ void MyVector::push_back(int value) {
 		int* tmp_data = new int[this->_capacity * 2];
 		for (size_t i = 0; i < this->_size; i++)
 			tmp_data[i] = this->_data[i];
-		delete this->_data;
+		delete[] this->_data;
 		this->_data = tmp_data;
 		this->_capacity *= 2;
 	}
@@ -52,7 +52,7 @@ void MyVector::insert(size_t index, int value) {
 		int* tmp_data = new int[this->_capacity * 2];
 		for (size_t i = 0; i < this->_size; i++)
 			tmp_data[i] = this->_data[i];
-		delete this->_data;
+		delete[] this->_data;
 		this->_data = tmp_data;
 		this->_capacity *= 2;
 	}
@@ -77,7 +77,7 @@ void MyVector::reserve(size_t new_capacity) {
 		int* tmp_data = new int[new_capacity];
 		for (size_t i = 0; i < this->_size; i++)
 			tmp_data[i] = this->_data[i];
-		delete this->_data;
+		delete[] this->_data;
 		this->_data = tmp_data;
 		this->_capacity = new_capacity;
 	}
@@ -89,7 +89,7 @@ void MyVector::resize(size_t new_size) {
 		int* tmp_data = new int[new_capacity];
 		for (size_t i = 0; i < this->_size; i++)
 			tmp_data[i] = this->_data[i];
-		delete this->_data;
+		delete[] this->_data;
 		this->_data = tmp_data;
 		this->_capacity = new_capacity;
 
