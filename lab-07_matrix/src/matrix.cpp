@@ -1,6 +1,6 @@
 #include "matrix.h"
 
-Matrix::Matrix(std::size_t r, std::size_t c) {
+Matrix::Matrix(const std::size_t r, const std::size_t c) {
 	_rows = r;
 	_cols = c;
 	_data = new int* [r];
@@ -52,7 +52,7 @@ void Matrix::print(FILE* f) const {
 	}
 }
 
-Matrix& Matrix::operator=(Matrix& m) {
+Matrix& Matrix::operator=(const Matrix& m) {
 	if (&m == this)
 		return *this;
 
@@ -83,29 +83,29 @@ bool Matrix::operator==(const Matrix& m) const {
 	return true;
 }
 
-bool Matrix::operator!=(Matrix& m) {
+bool Matrix::operator!=(const Matrix& m) const {
 	return !(*this == m);
 }
 
-Matrix& Matrix::operator+=(Matrix& m) {
+Matrix& Matrix::operator+=(const Matrix& m) {
 	Matrix res = *this + m;
 	*this = res;
 	return *this;
 }
 
-Matrix& Matrix::operator-=(Matrix& m) {
+Matrix& Matrix::operator-=(const Matrix& m) {
 	Matrix res = *this - m;
 	*this = res;
 	return *this;
 }
 
-Matrix& Matrix::operator*=(Matrix& m) {
+Matrix& Matrix::operator*=(const Matrix& m) {
 	Matrix res = *this * m;
 	*this = res;
 	return *this;
 }
 
-Matrix Matrix::operator+(Matrix& m) {
+Matrix Matrix::operator+(const Matrix& m) const {
 	Matrix res = Matrix(_rows, _cols);
 	for (std::size_t i = 0; i < _rows; i++) {
 		for (std::size_t j = 0; j < _cols; j++) {
@@ -115,7 +115,7 @@ Matrix Matrix::operator+(Matrix& m) {
 	return res;
 }
 
-Matrix Matrix::operator-(Matrix& m) {
+Matrix Matrix::operator-(const Matrix& m) const {
 	Matrix res = Matrix(this->_rows, this->_cols);
 	for (std::size_t i = 0; i < _rows; i++) {
 		for (std::size_t j = 0; j < _cols; j++) {
@@ -125,7 +125,7 @@ Matrix Matrix::operator-(Matrix& m) {
 	return res;
 }
 
-Matrix Matrix::operator*(Matrix& m) {
+Matrix Matrix::operator*(const Matrix& m) const {
 	Matrix res = Matrix(_rows, m._cols);
 	for (std::size_t i = 0; i < _rows; i++) {
 		for (std::size_t j = 0; j < m._cols; j++) {
