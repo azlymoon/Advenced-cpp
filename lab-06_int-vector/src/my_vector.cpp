@@ -55,35 +55,17 @@ size_t MyVector::capacity() {
 }
 
 void MyVector::push_back(int value) {
-	if (this->_size == this->_capacity) {
-		int* tmp_data = new int[this->_capacity * 2];
-		for (size_t i = 0; i < this->_size; i++)
-			tmp_data[i] = this->_data[i];
-		delete[] this->_data;
-		this->_data = tmp_data;
-		this->_capacity *= 2;
-	}
-
-	this->_data[this->_size] = value;
-	this->_size++;
+	this->resize(this->_size + 1);
+	this->_data[this->_size - 1] = value;
 }
 
 void MyVector::insert(size_t index, int value) {
-	if (this->_size == this->_capacity) {
-		int* tmp_data = new int[this->_capacity * 2];
-		for (size_t i = 0; i < this->_size; i++)
-			tmp_data[i] = this->_data[i];
-		delete[] this->_data;
-		this->_data = tmp_data;
-		this->_capacity *= 2;
-	}
-
+	this->resize(this->_size + 1);
 	for (size_t i = this->_size; i > index; i--) {
 		this->_data[i] = this->_data[i - 1];
 	}
 
 	this->_data[index] = value;
-	this->_size++;
 }
 
 void MyVector::erase(size_t index) {
