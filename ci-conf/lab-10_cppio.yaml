@@ -1,0 +1,13 @@
+lab-10_cppio tests:
+  image:   registry.miem.hse.ru/cpp_2022/private/docker/gcc-valgrind-cmake:v1
+  tags:
+    - docker
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^lab-10_cppio.*$/'
+  before_script:
+    - !reference [.bootstrap, before_script]
+  after_script:
+    - !reference [.bootstrap, after_script]
+  script:
+    - 'chmod 700 "/tmp/ci_$CI_JOB_ID/labs/run-tests"'
+    - 'PRIVATE_SUITE_PATH="/tmp/ci_$CI_JOB_ID/private-tests/lab-10_cppio" "/tmp/ci_$CI_JOB_ID/labs/run-tests" --report --report-path tests-report.xml --output /tmp/ci_$CI_JOB_ID/output lab-10_cppio'
