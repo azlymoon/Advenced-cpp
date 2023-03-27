@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -O2 -Wall -Werror -std=c++11 -Iinclude
-LDFLAGS = 
+LDFLAGS =
 
 EXE = lab-09_figures
 SRCDIR = src
