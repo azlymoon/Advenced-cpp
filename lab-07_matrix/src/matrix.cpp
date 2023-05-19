@@ -1,50 +1,138 @@
 #include "matrix.h"
 
-Matrix::Matrix(std::size_t r, std::size_t c) {
+Matrix::Matrix(const std::size_t r, const std::size_t c) {
+	_rows = r;
+	_cols = c;
+	_data = new int* [r];
+	for (std::size_t i = 0; i < _rows; i++) {
+		_data[i] = new int[_cols];
+		for (std::size_t j = 0; j < _cols; j++) {
+			_data[i][j] = 0;
+		}
+	}
 }
 
-std::size_t Matrix::get_rows() { return 0; }
-std::size_t Matrix::get_cols() { return 0; }
-
-void Matrix::set(std::size_t i, std::size_t j, int val) {
+Matrix::Matrix(const Matrix& m) {
+	_rows = m.get_rows();
+	_cols = m.get_cols();
+	_data = new int* [_rows];
+	for (std::size_t i = 0; i < _rows; i++) {
+		_data[i] = new int[_cols];
+	}
+	for (std::size_t i = 0; i < _rows; i++) {
+		for (std::size_t j = 0; j < _cols; j++) {
+			_data[i][j] = m._data[i][j];
+		}
+	}
 }
 
-int Matrix::get(std::size_t i, std::size_t j) {
-  return 0;
+Matrix::~Matrix() {
+	for (std::size_t i = 0; i < _rows; i++)
+		delete[] _data[i];
+	delete[] _data;
 }
 
-void Matrix::print(FILE* f) {
+std::size_t Matrix::get_rows() const { return _rows; }
+std::size_t Matrix::get_cols() const { return _cols; }
+
+void Matrix::set(const std::size_t i, const std::size_t j, const int val) {
+	_data[i][j] = val;
 }
 
-bool Matrix::operator==(Matrix& m) {
-  return true;
+int Matrix::get(const std::size_t i, const std::size_t j) const {
+	return _data[i][j];
 }
 
-bool Matrix::operator!=(Matrix& m) {
-  return false;
+void Matrix::print(FILE* f) const {
+	for (std::size_t i = 0; i < _rows; i++) {
+		for (std::size_t j = 0; j < _cols - 1; j++) {
+			fprintf(f, "%d ", _data[i][j]);
+		}
+		fprintf(f, "%d\n", _data[i][_cols - 1]);
+	}
 }
 
-Matrix& Matrix::operator+=(Matrix& m) {
-  return *this;
+Matrix& Matrix::operator=(const Matrix& m) {
+	if (&m == this)
+		return *this;
+
+	for (std::size_t i = 0; i < _rows; i++)
+		delete[] _data[i];
+	delete[] _data;
+	_rows = m.get_rows();
+	_cols = m.get_cols();
+	_data = new int* [_rows];
+	for (std::size_t i = 0; i < _rows; i++) {
+		_data[i] = new int [_cols];
+	}
+	for (std::size_t i = 0; i < _rows; i++) {
+		for (std::size_t j = 0; j < _cols; j++) {
+			_data[i][j] = m._data[i][j];
+		}
+	}
+	return *this;
 }
 
-Matrix& Matrix::operator-=(Matrix& m) {
-  return *this;
+bool Matrix::operator==(const Matrix& m) const {
+	for (std::size_t i = 0; i < _rows; i++) {
+		for (std::size_t j = 0; j < _cols; j++) {
+			if (_data[i][j] != m._data[i][j])
+				return false;
+		}
+	}
+	return true;
 }
 
-Matrix& Matrix::operator*=(Matrix& m) {
-  return *this;
+bool Matrix::operator!=(const Matrix& m) const {
+	return !(*this == m);
 }
 
-Matrix Matrix::operator+(Matrix& m) {
-  return *this;
+Matrix& Matrix::operator+=(const Matrix& m) {
+	Matrix res = *this + m;
+	*this = res;
+	return *this;
 }
 
-Matrix Matrix::operator-(Matrix& m) {
-  return *this;
-
+Matrix& Matrix::operator-=(const Matrix& m) {
+	Matrix res = *this - m;
+	*this = res;
+	return *this;
 }
 
-Matrix Matrix::operator*(Matrix& m) {
-  return *this;
+Matrix& Matrix::operator*=(const Matrix& m) {
+	Matrix res = *this * m;
+	*this = res;
+	return *this;
+}
+
+Matrix Matrix::operator+(const Matrix& m) const {
+	Matrix res = Matrix(_rows, _cols);
+	for (std::size_t i = 0; i < _rows; i++) {
+		for (std::size_t j = 0; j < _cols; j++) {
+			res._data[i][j] = _data[i][j] + m._data[i][j];
+		}
+	}
+	return res;
+}
+
+Matrix Matrix::operator-(const Matrix& m) const {
+	Matrix res = Matrix(this->_rows, this->_cols);
+	for (std::size_t i = 0; i < _rows; i++) {
+		for (std::size_t j = 0; j < _cols; j++) {
+			res._data[i][j] = _data[i][j] - m._data[i][j];
+		}
+	}
+	return res;
+}
+
+Matrix Matrix::operator*(const Matrix& m) const {
+	Matrix res = Matrix(_rows, m._cols);
+	for (std::size_t i = 0; i < _rows; i++) {
+		for (std::size_t j = 0; j < m._cols; j++) {
+			for (std::size_t k = 0; k < _cols; k++) {
+				res._data[i][j] += _data[i][k] * m._data[k][j];
+			}
+		}
+	}
+	return res;
 }
