@@ -99,18 +99,22 @@ namespace containers {
 
     template<typename T>
     void my_vector<T>::push_back(const T& t) {
-        resize(size_ + 1);
+        size_ += 1;
+        if (size_ > capacity_) {
+            std::size_t new_capacity = (size_ > capacity_ * 2 ? size_ : capacity_ * 2);
+            reserve(new_capacity);
+        }
         array_[size_ - 1] = t;
     }
 
     template<typename T>
     void my_vector<T>::pop_back() {
-        resize(size_ - 1);
+        size_ -= 1;
     }
 
     template<typename T>
     void my_vector<T>::clear() {
-        resize(0);
+        size_ = 0;
     }
 
     template<typename T>

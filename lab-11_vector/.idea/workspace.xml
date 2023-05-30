@@ -14,10 +14,8 @@
   <component name="ChangeListManager">
     <list default="true" id="20684ffc-2ff9-4e33-ab9c-3d9b8c9e7be8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/my_vector.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/my_vector.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/my_vector_impl.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/my_vector_impl.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab-11_vector" beforeDir="false" afterPath="$PROJECT_DIR$/lab-11_vector" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main" beforeDir="false" afterPath="$PROJECT_DIR$/main" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -175,7 +173,7 @@
       <workItem from="1685225917672" duration="1274000" />
       <workItem from="1685254260435" duration="6785000" />
       <workItem from="1685387230753" duration="7239000" />
-      <workItem from="1685434035884" duration="18833000" />
+      <workItem from="1685434035884" duration="20111000" />
     </task>
     <servers />
   </component>
@@ -187,22 +185,6 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticFoundErrors value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/main.cpp</url>
-          <line>83</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/src/main.cpp</url>
-          <line>49</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
