@@ -23,7 +23,7 @@ namespace containers {
     }
 
     template<typename T>
-    my_vector<T>::my_vector(my_vector<T> &other) {
+    my_vector<T>::my_vector(const my_vector<T> &other) {
         capacity_ = other.capacity_;
         size_ = other.size_;
         array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));

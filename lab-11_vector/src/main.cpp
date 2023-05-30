@@ -81,6 +81,16 @@ void test_my_vector(T a, T b){
     c = g;
     assert(c.size() == 20);
     assert(c.capacity() == 100);
+
+    containers::my_vector<T> v2;
+    v2.push_back(a);
+    v2.push_back(b);
+    containers::my_vector<T> v3(v2);
+    assert(v3.size() == 2);
+    assert(v3.capacity() == 2);
+    v2.clear();
+    std::cout << v2.size() << std::endl;
+    std::cout << v3 << std::endl;
 }
 
 int main() {
