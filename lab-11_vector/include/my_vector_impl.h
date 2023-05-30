@@ -34,7 +34,8 @@ namespace containers {
 
     template<typename T>
     my_vector<T>::~my_vector() {
-        operator delete[] (array_, capacity_ * sizeof(T));
+//        operator delete[] (array_, capacity_ * sizeof(T));
+            std::destroy_at(array_);
     }
 
     template<typename T>
@@ -62,7 +63,8 @@ namespace containers {
             T* tmp_data = static_cast<T*> (operator new[] (n * sizeof(T)));
             for (std::size_t i = 0; i < size_; i++)
                 tmp_data[i] = array_[i];
-            operator delete[] (array_, capacity_ * sizeof(T));
+//        operator delete[] (array_, capacity_ * sizeof(T));
+            std::destroy_at(array_);
             array_ = tmp_data;
             capacity_ = n;
         }
@@ -85,7 +87,8 @@ namespace containers {
         if (&other == this)
             return *this;
 
-        operator delete[] (array_, capacity_ * sizeof(T));
+//        operator delete[] (array_, capacity_ * sizeof(T));
+        std::destroy_at(array_);
         size_ = other.size_;
         capacity_ = other.capacity_;
         array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
