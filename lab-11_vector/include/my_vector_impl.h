@@ -8,17 +8,16 @@ namespace containers {
     my_vector<T>::my_vector() {
         capacity_ = 2;
         size_ = 0;
-        array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
+        array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
     }
 
     template<typename T>
     my_vector<T>::my_vector(std::size_t n) {
         capacity_ = n;
-        size_ = 0;
-        array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
-        for (std::size_t i = 0; i < capacity_; i++){
-            new (array_ + size_) T();
-            size_ += 1;
+        size_ = n;
+        array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
+        for (std::size_t i = 0; i < size_; i++){
+            new (array_ + i) T();
         }
     }
 
@@ -26,7 +25,7 @@ namespace containers {
     my_vector<T>::my_vector(const my_vector<T> &other) {
         capacity_ = other.capacity_;
         size_ = other.size_;
-        array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
+        array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
         for (std::size_t i = 0; i < size_; i++) {
             array_[i] = other.array_[i];
         }
@@ -76,7 +75,7 @@ namespace containers {
             std::size_t new_capacity = (n > capacity_ * 2 ? n : capacity_ * 2);
             this->reserve(new_capacity);
             for (std::size_t i = size_; i < n; i++) {
-                new(array_ + i) T();
+                new (array_ + i) T();
             }
         }
         size_ = n;
@@ -92,8 +91,8 @@ namespace containers {
         size_ = other.size_;
         capacity_ = other.capacity_;
         array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
-        for (std::size_t i = 0; i < capacity_; i++) {
-            new (array_ + i) T();
+        for (std::size_t i = 0; i < size_; i++) {
+            array_[i] = other.array_[i];
         }
         return *this;
     }

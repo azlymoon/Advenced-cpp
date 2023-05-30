@@ -12,7 +12,7 @@ public:
     my_vector();
     explicit my_vector(std::size_t n);
     my_vector(const my_vector& other);
-    my_vector& operator=(my_vector const& other);
+    my_vector& operator=(const my_vector & other);
     ~my_vector();
 
     std::size_t size() const;
