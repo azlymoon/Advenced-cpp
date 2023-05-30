@@ -19,9 +19,9 @@ public:
 };
 
 int main(){
-    int n = 16;
+    int n = 8;
     cout << sqrt(n) << endl;
-    cout << pow(2, (n % 2 == 0 ? (size_t)sqrt(n) : (size_t)sqrt(n) + 1));
+    cout << pow(2, (( n & (n - 1) ) == 0 ? (size_t)sqrt(n) : (size_t)sqrt(n) + 1));
     return 0;
 
 }

@@ -6,6 +6,15 @@
 namespace containers {
 
     template<typename T>
+    std::size_t my_vector<T>::cpl2(std::size_t x) {
+        std::size_t tmp = 1;
+        while (tmp < x) {
+            tmp *= 2;
+        }
+        return tmp;
+    }
+
+    template<typename T>
     my_vector<T>::my_vector() {
         capacity_ = 1;
         size_ = 0;
@@ -14,8 +23,8 @@ namespace containers {
 
     template<typename T>
     my_vector<T>::my_vector(std::size_t n) {
-        capacity_ = (std::size_t)std::pow(2, (n % 2 == 0 ? (std::size_t)std::sqrt(n) : (std::size_t)std::sqrt(n) + 1));
         size_ = n;
+        capacity_ = cpl2(n);
         array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
         for (std::size_t i = 0; i < size_; i++){
             new (array_ + i) T();
@@ -101,7 +110,7 @@ namespace containers {
     template<typename T>
     void my_vector<T>::push_back(const T& t) {
         if (size_ + 1 > capacity_) {
-            std::size_t new_capacity = pow(2, ((size_ + 1) % 2 == 0 ? (size_t)sqrt((size_ + 1)) : (size_t)sqrt((size_ + 1)) + 1));
+            std::size_t new_capacity = cpl2(size_ + 1);
             reserve(new_capacity);
         }
         size_ += 1;

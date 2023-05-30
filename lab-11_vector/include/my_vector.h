@@ -29,6 +29,8 @@ public:
     void pop_back();
     void clear();
 
+    std::size_t cpl2 (std::size_t x);
+
 private:
     size_t capacity_;
     size_t size_;
