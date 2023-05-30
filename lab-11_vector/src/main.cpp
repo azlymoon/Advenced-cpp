@@ -49,7 +49,7 @@ template<typename T>
 void test_my_vector(T a, T b){
     containers::my_vector<T> v;
     assert(v.empty());
-    assert(v.capacity() == 2);
+    assert(v.capacity() == 1);
 
     v.push_back(a);
     v.push_back(b);

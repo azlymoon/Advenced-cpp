@@ -6,7 +6,7 @@ namespace containers {
 
     template<typename T>
     my_vector<T>::my_vector() {
-        capacity_ = 2;
+        capacity_ = 1;
         size_ = 0;
         array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
     }
@@ -99,11 +99,11 @@ namespace containers {
 
     template<typename T>
     void my_vector<T>::push_back(const T& t) {
-        size_ += 1;
-        if (size_ > capacity_) {
+        if (size_ + 1> capacity_) {
             std::size_t new_capacity = (size_ > capacity_ * 2 ? size_ : capacity_ * 2);
             reserve(new_capacity);
         }
+        size_ += 1;
         array_[size_ - 1] = t;
     }
 
