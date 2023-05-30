@@ -17,7 +17,8 @@ namespace containers {
         size_ = 0;
         array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
         for (std::size_t i = 0; i < capacity_; i++){
-            new (array_ + i) T();
+            new (array_ + size_) T();
+            size_ += 1;
         }
     }
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cassert>
 
 #include "my_vector.h"
 
@@ -38,9 +39,7 @@ private:
 };
 
 std::ostream &operator<<(std::ostream& os, const product::Product& pr) {
-    os << "name: " << pr.name() << std::endl;
-    os << "quantity: " << pr.quantity() << std::endl;
-    os << "price: " << pr.price() << std::endl;
+    os << "Product: " << pr.name() << ' ' << pr.quantity() << ' ' << pr.price();
     return os;
 }
 
@@ -49,34 +48,39 @@ std::ostream &operator<<(std::ostream& os, const product::Product& pr) {
 template<typename T>
 void test_my_vector(T a, T b){
     containers::my_vector<T> v;
-    std::cout << "v.size: " <<  v.size() << " v.capacity: " << v.capacity() << " v.empty: " << v.empty() << std::endl;
+    assert(v.empty());
+    assert(v.capacity() == 2);
 
     v.push_back(a);
     v.push_back(b);
-    std::cout << v << std::endl;
-    std::cout << v[0] << std::endl;
+    assert(v.size() == 2);
+    assert(v.capacity() == 2);
     containers::my_vector<T> g = v;
-    std::cout << "v.size: " <<  v.size() << " v.capacity: " << v.capacity() << " v.empty: " << v.empty() << std::endl;
+    assert(g.size() == 2);
+    assert(g.capacity() == 2);
 
     v.pop_back();
-    std::cout << "v.size: " <<  v.size() << " v.capacity: " << v.capacity() << " v.empty: " << v.empty() << std::endl;
+    assert(v.size() == 1);
+    assert(v.capacity() == 2);
 
     v.clear();
-    std::cout << "v.size: " <<  v.size() << " v.capacity: " << v.capacity() << " v.empty: " << v.empty() << std::endl;
+    assert(v.empty());
+    assert(v.capacity() == 2);
 
-    std::cout << "g.size: " <<  g.size() << " g.capacity: " << g.capacity() << " g.empty: " << g.empty() << std::endl;
     g.resize(20);
-    std::cout << "g.size: " <<  g.size() << " g.capacity: " << g.capacity() << " g.empty: " << g.empty() << std::endl;
+    assert(g.size() == 20);
 
     g.reserve(100);
-    std::cout << "g.size: " <<  g.size() << " g.capacity: " << g.capacity() << " g.empty: " << g.empty() << std::endl;
+    assert(g.capacity() == 100);
 
     containers::my_vector<T> c(10);
-    std::cout << "c.size: " <<  c.size() << " c.capacity: " << c.capacity() << " c.empty: " << c.empty() << std::endl;
+    assert(c.size() == 10);
+    assert(c.capacity() == 10);
+    assert(!c.empty());
 
     c = g;
-    std::cout << "c.size: " <<  c.size() << " c.capacity: " << c.capacity() << " c.empty: " << c.empty() << std::endl;
-
+    assert(c.size() == 20);
+    assert(c.capacity() == 100);
 }
 
 int main() {
