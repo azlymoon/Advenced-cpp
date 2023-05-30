@@ -53,6 +53,7 @@ void test_my_vector(T a, T b){
 
     v.push_back(a);
     v.push_back(b);
+    std::cout << v.capacity() << std::endl;
     assert(v.size() == 2);
     assert(v.capacity() == 2);
     containers::my_vector<T> g = v;

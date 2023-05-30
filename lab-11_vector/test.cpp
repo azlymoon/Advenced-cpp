@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 using namespace std;
 
 class A {
@@ -18,26 +19,9 @@ public:
 };
 
 int main(){
-    int n = 5;
-    A* array_of_A = static_cast<A*> (operator new[] (n * sizeof(A)));
-    A* tmp = static_cast<A*> (operator new[] (n * sizeof(A)));;
-    A* array;
-
-    for (int i = 0; i < n; i++) {
-        new (array_of_A + i) A();
-    }
-
-    for (int i = 0; i < n; i++)
-        tmp[i] = array_of_A[i];
-
-    printf("%#X\n", array_of_A);
-    printf("%#X\n", array);
-
-
-    for (int i = 0; i < n; i++){
-        cout << tmp[i].age() << " " << tmp[i].name() << endl;
-    }
-
+    int n = 16;
+    cout << sqrt(n) << endl;
+    cout << pow(2, (n % 2 == 0 ? (size_t)sqrt(n) : (size_t)sqrt(n) + 1));
     return 0;
 
 }

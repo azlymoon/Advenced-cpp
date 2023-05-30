@@ -17,6 +17,8 @@
       <change beforePath="$PROJECT_DIR$/include/my_vector_impl.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/my_vector_impl.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lab-11_vector" beforeDir="false" afterPath="$PROJECT_DIR$/lab-11_vector" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test" beforeDir="false" afterPath="$PROJECT_DIR$/test" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/test.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +93,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="C/C++ File.main.cpp">
+  <component name="RunManager" selected="C/C++ File.test.cpp">
     <configuration name="main.cpp" type="CppFileRunConfiguration" factoryName="CppFileRunConfiguration" nameIsGenerated="true" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="lab-11_vector" TARGET_NAME="main.cpp" CONFIG_NAME="main.cpp">
       <option name="compilerOptions" value="-std=c++17 -Wall -Wextra -Werror -I include/ -g -fno-stack-protector" />
       <option name="sourceFile" value="$PROJECT_DIR$/src/main.cpp" />
@@ -173,7 +175,7 @@
       <workItem from="1685225917672" duration="1274000" />
       <workItem from="1685254260435" duration="6785000" />
       <workItem from="1685387230753" duration="7239000" />
-      <workItem from="1685434035884" duration="20718000" />
+      <workItem from="1685434035884" duration="22546000" />
     </task>
     <servers />
   </component>

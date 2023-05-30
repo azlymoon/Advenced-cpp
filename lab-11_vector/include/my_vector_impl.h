@@ -1,6 +1,7 @@
 #ifndef MY_VECTOR_IMPL_H_
 #define MY_VECTOR_IMPL_H_
 #include "my_vector.h"
+#include <cmath>
 
 namespace containers {
 
@@ -13,7 +14,7 @@ namespace containers {
 
     template<typename T>
     my_vector<T>::my_vector(std::size_t n) {
-        capacity_ = n;
+        capacity_ = (std::size_t)std::pow(2, (n % 2 == 0 ? (std::size_t)std::sqrt(n) : (std::size_t)std::sqrt(n) + 1));
         size_ = n;
         array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
         for (std::size_t i = 0; i < size_; i++){
@@ -99,8 +100,8 @@ namespace containers {
 
     template<typename T>
     void my_vector<T>::push_back(const T& t) {
-        if (size_ + 1> capacity_) {
-            std::size_t new_capacity = (size_ > capacity_ * 2 ? size_ : capacity_ * 2);
+        if (size_ + 1 > capacity_) {
+            std::size_t new_capacity = pow(2, ((size_ + 1) % 2 == 0 ? (size_t)sqrt((size_ + 1)) : (size_t)sqrt((size_ + 1)) + 1));
             reserve(new_capacity);
         }
         size_ += 1;
