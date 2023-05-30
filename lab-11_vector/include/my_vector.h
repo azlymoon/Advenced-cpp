@@ -39,6 +39,6 @@ template<typename T>
 std::ostream& operator<<(std::ostream &os, const my_vector<T> &vec);
 }
 
-#include "my_vector_impl.hpp"
+#include "my_vector_impl.h"
 
 #endif // MY_VECTOR_H_

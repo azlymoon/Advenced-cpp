@@ -1,6 +1,6 @@
 #ifndef MY_VECTOR_IMPL_H_
 #define MY_VECTOR_IMPL_H_
-#include "my_vector.hpp"
+#include "my_vector.h"
 
 namespace containers {
 
