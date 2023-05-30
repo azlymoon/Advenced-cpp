@@ -1,14 +1,27 @@
+CXX = g++
+CXXFLAGS = -O2 -Wall -Werror -std=c++17 -Iinclude
+LDFLAGS = 
 
-CFLAGS ?= -std=c++17 -Wall -Wextra -Werror -I include/ -g -fno-stack-protector
+EXE = lab-11_vector
+SRCDIR = src
+BINDIR = obj
 
-lab-11_vector: obj/main.o obj/my_vector_impl.o obj
-	g++ $(CFLAGS) obj/main.o obj/my_vector_impl.o -o lab-11_vector
-obj/main.o: src/main.cpp include/my_vector.hpp | obj
-	g++ $(CFLAGS) -c src/main.cpp -o obj/main.o
-obj/my_vector_impl.o: include/my_vector_impl.hpp include/my_vector.hpp | obj
-	g++ $(CFLAGS) -c include/my_vector_impl.hpp -o obj/my_vector_impl.o
-obj:
-	mkdir obj
-.PHONY: clean
+OBJECTS = $(patsubst $(SRCDIR)/%.cpp,$(BINDIR)/%.o,$(wildcard $(SRCDIR)/*.cpp))
+
+all: $(EXE)
+
+$(EXE): $(BINDIR) $(OBJECTS)
+	$(CXX) $(OBJECTS) -o $(EXE) $(LDFLAGS)
+	
+$(BINDIR)/%.o: $(SRCDIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c -MMD -o $@ $<
+
+include $(wildcard $(BINDIR)/*.d)
+
+$(BINDIR):
+	mkdir -p $(BINDIR)
+
 clean:
-	rm -rf obj
+	rm -rf $(BINDIR) $(EXE)
+
+.PHONY: clean all

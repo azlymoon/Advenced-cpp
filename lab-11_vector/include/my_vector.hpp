@@ -17,7 +17,7 @@ public:
 
     std::size_t size() const;
     std::size_t capacity() const;
-    bool empty();
+    bool empty() const;
 
     void resize(std::size_t n);
     void reserve(std::size_t n);
@@ -25,7 +25,7 @@ public:
     T& operator[](std::size_t index);
     const T& operator[](std::size_t index) const;
 
-    void push_back(T t);
+    void push_back(const T& t);
     void pop_back();
     void clear();
 

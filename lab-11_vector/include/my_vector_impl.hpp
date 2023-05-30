@@ -33,7 +33,7 @@ namespace containers {
 
     template<typename T>
     my_vector<T>::~my_vector() {
-        delete[] array_;
+        operator delete[] (array_, capacity_ * sizeof(T));
     }
 
     template<typename T>
@@ -47,7 +47,7 @@ namespace containers {
     }
 
     template<typename T>
-    bool my_vector<T>::empty() {
+    bool my_vector<T>::empty() const {
         if (size_ == 0) {
             return true;
         } else {
@@ -61,7 +61,7 @@ namespace containers {
             T* tmp_data = static_cast<T*> (operator new[] (n * sizeof(T)));
             for (std::size_t i = 0; i < size_; i++)
                 tmp_data[i] = array_[i];
-            delete[] array_;
+            operator delete[] (array_, capacity_ * sizeof(T));
             array_ = tmp_data;
             capacity_ = n;
         }
@@ -84,7 +84,7 @@ namespace containers {
         if (&other == this)
             return *this;
 
-        delete[] array_;
+        operator delete[] (array_, capacity_ * sizeof(T));
         size_ = other.size_;
         capacity_ = other.capacity_;
         array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
@@ -95,7 +95,7 @@ namespace containers {
     }
 
     template<typename T>
-    void my_vector<T>::push_back(T t) {
+    void my_vector<T>::push_back(const T& t) {
         resize(size_ + 1);
         array_[size_ - 1] = t;
     }

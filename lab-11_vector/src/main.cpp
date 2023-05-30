@@ -40,7 +40,7 @@ private:
 std::ostream &operator<<(std::ostream& os, const product::Product& pr) {
     os << "name: " << pr.name() << std::endl;
     os << "quantity: " << pr.quantity() << std::endl;
-    os << "price: " << pr.price();
+    os << "price: " << pr.price() << std::endl;
     return os;
 }
 
@@ -53,6 +53,8 @@ void test_my_vector(T a, T b){
 
     v.push_back(a);
     v.push_back(b);
+    std::cout << v << std::endl;
+    std::cout << v[0] << std::endl;
     containers::my_vector<T> g = v;
     std::cout << "v.size: " <<  v.size() << " v.capacity: " << v.capacity() << " v.empty: " << v.empty() << std::endl;
 
@@ -75,11 +77,6 @@ void test_my_vector(T a, T b){
     c = g;
     std::cout << "c.size: " <<  c.size() << " c.capacity: " << c.capacity() << " c.empty: " << c.empty() << std::endl;
 
-    std::cout << g << std::endl;
-
-    for (std::size_t i = 0; i < g.size(); i++){
-        std::cout << g[i] << std::endl;
-    }
 }
 
 int main() {
@@ -89,7 +86,7 @@ int main() {
 	v.push_back(n);
 	std::cout << v << std::endl;
 
-//    test_my_vector<int>(5, 10);
+    test_my_vector<int>(5, 10);
     test_my_vector<product::Product>(product::Product("asdf", 4, 12.0), product::Product("qwe", -1, 7.5));
 
     return 0;
