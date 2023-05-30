@@ -2,6 +2,7 @@
 #define MY_VECTOR_H_
 
 #include <cstddef>
+#include <iostream>
 
 namespace containers {
 
@@ -22,6 +23,7 @@ public:
     void reserve(std::size_t n);
 
     T& operator[](std::size_t index);
+    const T& operator[](std::size_t index) const;
 
     void push_back(T t);
     void pop_back();
@@ -35,10 +37,8 @@ private:
 
 template<typename T>
 std::ostream& operator<<(std::ostream &os, const my_vector<T> &vec);
-
-
 }
 
 #include "my_vector_impl.hpp"
 
-#endif  // MY_VECTOR_H_
+#endif // MY_VECTOR_H_

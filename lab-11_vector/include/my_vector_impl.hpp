@@ -1,3 +1,5 @@
+#ifndef MY_VECTOR_IMPL_H_
+#define MY_VECTOR_IMPL_H_
 #include "my_vector.hpp"
 
 namespace containers {
@@ -95,7 +97,7 @@ namespace containers {
     template<typename T>
     void my_vector<T>::push_back(T t) {
         resize(size_ + 1);
-        array_[size_ - 1] = T();
+        array_[size_ - 1] = t;
     }
 
     template<typename T>
@@ -114,6 +116,11 @@ namespace containers {
     }
 
     template<typename T>
+    const T &my_vector<T>::operator[](std::size_t index) const {
+        return array_[index];
+    }
+
+    template<typename T>
     std::ostream& operator<<(std::ostream& os, my_vector<T> const& vec) {
         for (std::size_t i = 0; i < vec.size() - 1; i++) {
             os << vec[i] << ' ';
@@ -122,3 +129,5 @@ namespace containers {
         return os;
     }
 }
+
+#endif // MY_VECTOR_IMPL_H_
