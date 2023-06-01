@@ -1,9 +1,15 @@
-#ifndef MY_VECTOR_IMPL_H_
-#define MY_VECTOR_IMPL_H_
-#include "my_vector.h"
+//#ifndef MY_VECTOR_IMPL_H_
+//#define MY_VECTOR_IMPL_H_
 #include <cmath>
+#include <cstdint>
 
 namespace containers {
+
+    template<typename T>
+    T* my_vector<T>::allocate(std::size_t n) {
+        auto* data = new std::uint8_t[n * sizeof(T)];
+        return reinterpret_cast<T*>(data);
+    }
 
     template<typename T>
     std::size_t my_vector<T>::cpl2(std::size_t x) {
@@ -15,17 +21,30 @@ namespace containers {
     }
 
     template<typename T>
-    my_vector<T>::my_vector() {
-        capacity_ = 1;
+    void my_vector<T>::destroy_items(std::size_t from, std::size_t to) noexcept {
+        for (std::size_t i = from; i < to; i++)
+            array_[i].~T();
+    }
+
+    template<typename T>
+    void my_vector<T>::destroy_data() noexcept {
+        destroy_items(0, size_);
+        auto* data = (std::uint8_t*)array_;
+        delete[] data;
+    }
+
+    template<typename T>
+    my_vector<T>::my_vector() noexcept {
         size_ = 0;
-        array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
+        capacity_ = cpl2(size_);
+        array_ = allocate(capacity_);
     }
 
     template<typename T>
     my_vector<T>::my_vector(std::size_t n) {
         size_ = n;
-        capacity_ = cpl2(n);
-        array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
+        capacity_ = cpl2(size_);
+        array_ = allocate(capacity_);
         for (std::size_t i = 0; i < size_; i++){
             new (array_ + i) T();
         }
@@ -33,18 +52,17 @@ namespace containers {
 
     template<typename T>
     my_vector<T>::my_vector(const my_vector<T> &other) {
-        capacity_ = other.capacity_;
         size_ = other.size_;
-        array_ = static_cast<T*> (operator new[] (capacity_ * sizeof(T)));
+        capacity_ = other.capacity_;
+        array_ = allocate(capacity_);
         for (std::size_t i = 0; i < size_; i++) {
-            array_[i] = other.array_[i];
+            new (array_ + i) T(other.array_[i]);
         }
     }
 
     template<typename T>
     my_vector<T>::~my_vector() {
-//        operator delete[] (array_, capacity_ * sizeof(T));
-            std::destroy_at(array_);
+          destroy_data();
     }
 
     template<typename T>
@@ -68,26 +86,44 @@ namespace containers {
 
     template<typename T>
     void my_vector<T>::reserve(std::size_t n) {
-        if (n > capacity_) {
-            T* tmp_data = static_cast<T*> (operator new[] (n * sizeof(T)));
-            for (std::size_t i = 0; i < size_; i++)
-                tmp_data[i] = array_[i];
-//        operator delete[] (array_, capacity_ * sizeof(T));
-            std::destroy_at(array_);
-            array_ = tmp_data;
-            capacity_ = n;
-        }
+        if (n <= capacity_)
+            return;
+
+        std::size_t new_capacity = cpl2(n);
+        T* tmp_data = allocate(new_capacity);
+        for (std::size_t i = 0; i < size_; i++)
+            new (tmp_data + i) T(array_[i]);
+        destroy_data();
+        array_ = tmp_data;
+        capacity_ = new_capacity;
     }
 
     template<typename T>
     void my_vector<T>::resize(std::size_t n) {
-        if (n > capacity_) {
-            std::size_t new_capacity = (n > capacity_ * 2 ? n : capacity_ * 2);
-            this->reserve(new_capacity);
-            for (std::size_t i = size_; i < n; i++) {
-                new (array_ + i) T();
-            }
+        if (n <= size_) {
+            destroy_items(n, size_);
+            size_ = n;
+            return;
         }
+
+        if (n <= capacity_) {
+            for (std::size_t i = size_; i < n; i++)
+                new (array_ + i) T();
+            size_ = n;
+            return;
+        }
+
+        std::size_t new_capacity = cpl2(n);
+        T* tmp_data = allocate(new_capacity);
+        for (std::size_t i = 0; i < size_; i++) {
+            new (tmp_data + i) T(array_[i]);
+        }
+        for (std::size_t i = size_; i < n; i++) {
+            new (tmp_data + i) T();
+        }
+        destroy_data();
+        array_ = tmp_data;
+        capacity_ = new_capacity;
         size_ = n;
     }
 
@@ -96,25 +132,20 @@ namespace containers {
         if (&other == this)
             return *this;
 
-//        operator delete[] (array_, capacity_ * sizeof(T));
-        std::destroy_at(array_);
+        destroy_data();
         size_ = other.size_;
         capacity_ = other.capacity_;
-        array_ = static_cast<T*>(operator new[] (capacity_ * sizeof(T)));
+        array_ = allocate(capacity_);
         for (std::size_t i = 0; i < size_; i++) {
-            array_[i] = other.array_[i];
+            new (array_ + i) T(other.array_[i]);
         }
         return *this;
     }
 
     template<typename T>
     void my_vector<T>::push_back(const T& t) {
-        if (size_ + 1 > capacity_) {
-            std::size_t new_capacity = cpl2(size_ + 1);
-            reserve(new_capacity);
-        }
-        size_ += 1;
-        array_[size_ - 1] = t;
+        reserve(size_ + 1);
+        new (array_ + size_++) T(t);
     }
 
     template<typename T>
@@ -147,4 +178,4 @@ namespace containers {
     }
 }
 
-#endif // MY_VECTOR_IMPL_H_
+//#endif // MY_VECTOR_IMPL_H_

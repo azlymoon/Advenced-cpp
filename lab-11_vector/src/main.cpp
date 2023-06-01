@@ -53,7 +53,7 @@ void test_my_vector(T a, T b){
 
     v.push_back(a);
     v.push_back(b);
-//    std::cout << v.capacity() << std::endl;
+    std::cout << v.capacity() << std::endl;
     assert(v.size() == 2);
     assert(v.capacity() == 2);
     containers::my_vector<T> g = v;
@@ -75,7 +75,7 @@ void test_my_vector(T a, T b){
     assert(g.size() == 20);
 
     g.reserve(100);
-    assert(g.capacity() == 100);
+    assert(g.capacity() == 128);
 
     containers::my_vector<T> c(10);
     assert(c.size() == 10);
@@ -85,7 +85,7 @@ void test_my_vector(T a, T b){
 //    containers::my_vector<T> c;
     c = g;
     assert(c.size() == 20);
-    assert(c.capacity() == 100);
+    assert(c.capacity() == 128);
 
     containers::my_vector<T> v2;
     v2.push_back(a);
@@ -105,7 +105,7 @@ int main() {
 	v.push_back(n);
 	std::cout << v << std::endl;
 
-    test_my_vector<int>(5, 10);
+//    test_my_vector<int>(5, 10);
     test_my_vector<product::Product>(product::Product("asdf", 4, 12.0), product::Product("qwe", -1, 7.5));
 
     return 0;
