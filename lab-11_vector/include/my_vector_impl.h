@@ -150,11 +150,13 @@ namespace containers {
 
     template<typename T>
     void my_vector<T>::pop_back() {
-        size_ -= 1;
+        array_[--size_].~T();
     }
 
     template<typename T>
     void my_vector<T>::clear() {
+        for (std::size_t i = 0; i < size_; i++)
+            array_[i].~T();
         size_ = 0;
     }
 
