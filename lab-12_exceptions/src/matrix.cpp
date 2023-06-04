@@ -21,6 +21,7 @@ namespace Matrix {
         n_ = tmp_n_;
         m_ = tmp_m_;
         matrix_ = tmp_matrix_;
+
     }
 
 //    void Matrix::allocate(int n, int m, std::vector<std::vector<int>>& matrix) {
@@ -39,7 +40,13 @@ namespace Matrix {
             throw MatrixException("file_error");
 
         tmp_matrix_.clear();
-        in_ >> tmp_n_ >> tmp_m_;
+        int cnt = 0;
+        if (in_ >> tmp_n_) cnt++;
+        if (in_ >> tmp_m_) cnt++;
+        if (cnt != 2) {
+            in_.close();
+            throw MatrixException("format_error");
+        }
         in_.get();
         std::string line;
         while (std::getline(in_, line)) {
