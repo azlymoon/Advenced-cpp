@@ -30,12 +30,10 @@ int main() {
             } catch (const std::bad_alloc& e) {
                 std::cout << "Unable to allocate memory." << std::endl;
             }
-        }
-        else if (command == "print") {
+        } else if (command == "print") {
             int reg = read_reg();
             registers[reg].print();
-        }
-        else if (command == "add") {
+        } else if (command == "add") {
             int reg1 = read_reg();
             int reg2 = read_reg();
             try {
@@ -45,8 +43,7 @@ int main() {
             } catch (const std::bad_alloc& e) {
                 std::cout << "Unable to allocate memory." << std::endl;
             }
-        }
-        else if (command == "mul") {
+        } else if (command == "mul") {
             int reg1 = read_reg();
             int reg2 = read_reg();
             try {
@@ -56,12 +53,11 @@ int main() {
             } catch (const std::bad_alloc& e) {
                 std::cout << "Unable to allocate memory." << std::endl;
             }
-        }
-        else if (command == "elem") {
+        } else if (command == "elem") {
+            int row, col;
+            int reg = read_reg();
+            std::cin >> row >> col;
             try {
-                int row, col;
-                int reg = read_reg();
-                std::cin >> row >> col;
                 std::cout << registers[reg].elem(row, col) << std::endl;
             } catch (const Matrix::MatrixException& e) {
                 std::cout << "ACCESS: bad index." << std::endl;

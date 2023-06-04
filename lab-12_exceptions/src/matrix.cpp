@@ -20,31 +20,18 @@ namespace Matrix {
     void Matrix::save_changes() {
         n_ = tmp_n_;
         m_ = tmp_m_;
-        matrix_ = tmp_matrix_;
+        matrix_ = std::move(tmp_matrix_);
 
     }
 
-//    void Matrix::allocate(int n, int m, std::vector<std::vector<int>>& matrix) {
-//        try {
-//            matrix = new int *[n];
-//            for (int i = 0; i < n; i++)
-//                matrix[i] = new int[m];
-//        } catch (const std::bad_alloc& e) {
-//            throw MatrixException("bad_alloc");
-//        }
-//    }
-
-    void Matrix::load(const std::string& fname) {
-        in_.open(fname);
+    void Matrix::load(const std::string& filename) {
+        in_.open(filename);
         if (!in_.is_open())
             throw MatrixException("file_error");
 
         tmp_matrix_.clear();
         tmp_n_ = 0, tmp_m_ = 0;
-        int cnt = 0;
-        if (in_ >> tmp_n_) cnt++;
-        if (in_ >> tmp_m_) cnt++;
-        if (cnt != 2) {
+        if (!(in_ >> tmp_n_ >> tmp_m_)) {
             in_.close();
             throw MatrixException("format_error");
         }

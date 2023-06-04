@@ -26,7 +26,7 @@ namespace Matrix {
         void save_changes();
 //        void allocate(int n, int m, std::vector<std::vector<int>>& matrix);
 //        void clear_matrix(int n, std::vector<std::vector<int>>& matrix);
-        void load(const std::string& fname);
+        void load(const std::string& filename);
         void print();
         void add (Matrix& b);
         void mul (Matrix& b);
