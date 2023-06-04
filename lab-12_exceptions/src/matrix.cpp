@@ -50,8 +50,10 @@ namespace Matrix {
                 row.push_back(num);
                 count++;
             }
-            if (count != tmp_m_)
+            if (count != tmp_m_) {
+                in_.close();
                 throw MatrixException("format_error");
+            }
             tmp_matrix_.push_back(row);
         }
         in_.close();
