@@ -27,6 +27,8 @@ int main() {
                     std::cout << "LOAD: unable to open file." << std::endl;
                 else if (e.getMessage() == "format_error")
                     std::cout << "LOAD: invalid file format." << std::endl;
+            } catch (const std::bad_alloc& e) {
+                std::cout << "Unable to allocate memory." << std::endl;
             }
         }
         else if (command == "print") {
@@ -40,6 +42,8 @@ int main() {
                 registers[reg1].add(registers[reg2]);
             } catch (const Matrix::MatrixException& e) {
                 std::cout << "ADD: dimensions do not match." << std::endl;
+            } catch (const std::bad_alloc& e) {
+                std::cout << "Unable to allocate memory." << std::endl;
             }
         }
         else if (command == "mul") {
@@ -49,6 +53,8 @@ int main() {
                 registers[reg1].mul(registers[reg2]);
             } catch (const Matrix::MatrixException& e) {
                 std::cout << "MUL: #arg1.columns != #arg2.rows." << std::endl;
+            } catch (const std::bad_alloc& e) {
+                std::cout << "Unable to allocate memory." << std::endl;
             }
         }
         else if (command == "elem") {
@@ -59,6 +65,8 @@ int main() {
                 std::cout << registers[reg].elem(row, col) << std::endl;
             } catch (const Matrix::MatrixException& e) {
                 std::cout << "ACCESS: bad index." << std::endl;
+            } catch (const std::bad_alloc& e) {
+                std::cout << "Unable to allocate memory." << std::endl;
             }
         }
         std::cin >> command;

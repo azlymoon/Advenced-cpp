@@ -40,6 +40,7 @@ namespace Matrix {
             throw MatrixException("file_error");
 
         tmp_matrix_.clear();
+        tmp_n_ = 0, tmp_m_ = 0;
         int cnt = 0;
         if (in_ >> tmp_n_) cnt++;
         if (in_ >> tmp_m_) cnt++;
@@ -48,6 +49,7 @@ namespace Matrix {
             throw MatrixException("format_error");
         }
         in_.get();
+
         std::string line;
         while (std::getline(in_, line)) {
             std::istringstream iss(line);
@@ -63,6 +65,7 @@ namespace Matrix {
             }
             tmp_matrix_.push_back(row);
         }
+
         in_.close();
         save_changes();
     }
@@ -92,8 +95,7 @@ namespace Matrix {
             throw MatrixException("dimension_error");
 
         tmp_matrix_.clear();
-        tmp_n_ = n_;
-        tmp_m_ = b.m_;
+        tmp_n_ = n_, tmp_m_ = b.m_;
 
         for (int i = 0; i < n_; i++) {
             std::vector<int> row;
