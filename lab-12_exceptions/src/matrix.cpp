@@ -83,7 +83,7 @@ namespace Matrix {
     }
 
     void Matrix::mul(Matrix &b) {
-        if (n_ != b.m_)
+        if (m_ != b.n_)
             throw MatrixException("dimension_error");
 
         tmp_matrix_.clear();
