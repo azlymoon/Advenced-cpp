@@ -38,21 +38,26 @@ namespace Matrix {
         in_.get();
 
         std::string line;
+        int count_n = 0;
         while (std::getline(in_, line)) {
             std::istringstream iss(line);
             std::vector<int> row;
-            int num, count = 0;
+            int num, count_m = 0;
             while (iss >> num) {
                 row.push_back(num);
-                count++;
+                count_m++;
             }
-            if (count != tmp_m_) {
+            if (count_m != tmp_m_) {
                 in_.close();
                 throw MatrixException("format_error");
             }
             tmp_matrix_.push_back(row);
+            count_n++;
         }
-
+        if (count_n != tmp_m_) {
+            in_.close();
+            throw MatrixException("format_error");
+        }
         in_.close();
         save_changes();
     }
