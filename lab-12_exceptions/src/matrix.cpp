@@ -89,7 +89,7 @@ namespace Matrix {
         tmp_matrix_.clear();
         tmp_n_ = n_, tmp_m_ = b.m_;
 
-        if (tmp_n_ > n_ && tmp_m_ > m_)
+        if (tmp_n_ > n_ || tmp_m_ > m_)
             throw std::bad_alloc();
 
         for (int i = 0; i < n_; i++) {
