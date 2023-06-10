@@ -54,7 +54,7 @@ namespace Matrix {
             tmp_matrix_.push_back(row);
             count_n++;
         }
-        if (count_n != tmp_m_) {
+        if (count_n != tmp_n_) {
             in_.close();
             throw MatrixException("format_error");
         }
