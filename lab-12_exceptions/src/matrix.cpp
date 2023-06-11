@@ -96,7 +96,7 @@ namespace Matrix {
             std::vector<int> row;
             for (int j = 0; j < b.m_; j++) {
                 int sum = 0;
-                for (int k = 0; k < n_; k++) {
+                for (int k = 0; k < m_; k++) {
                     sum += matrix_[i][k] * b.matrix_[k][j];
                 }
                 row.push_back(sum);
