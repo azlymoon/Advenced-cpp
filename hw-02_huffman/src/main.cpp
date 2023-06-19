@@ -1,10 +1,10 @@
-#include "huffman.hpp"
+#include "HuffmanArchiver.hpp"
 #include <iostream>
 #include <cstring>
 
 int main(int argc, char* argv[]) {
     if (argc != 6)
-        return argc;
+        return 1;
 
     std::string mode, in_file_path, out_file_path;
 
@@ -25,10 +25,18 @@ int main(int argc, char* argv[]) {
 
     huffman::HuffmanArchiver archiver(in_file_path, out_file_path);
     if (mode == "encode") {
-        archiver.encode();
+        try {
+            archiver.encode();
+        } catch (...) {
+            return 2;
+        }
     }
     else if (mode == "decode") {
-        archiver.decode();
+        try {
+            archiver.decode();
+        } catch (...) {
+            return 2;
+        }
     }
 
     return 0;
