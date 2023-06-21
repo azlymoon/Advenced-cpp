@@ -16,6 +16,11 @@ namespace employees {
         virtual void output(std::ostream&) const = 0;
         friend std::istream& operator>>(std::istream&, Employee&);
         friend std::ostream& operator<<(std::ostream&, const Employee&);
+        std::string name();
+        int32_t base_salary() const;
+        virtual void save(const std::string& output_path) const = 0;
+        virtual void load(const std::string& input_path) = 0;
+
     protected:
         std::string _name;
         int32_t _base_salary;
@@ -33,8 +38,13 @@ namespace employees {
         void set_has_bonus(bool);
         void input(std::istream&);
         void output(std::ostream&) const;
+        bool has_bonus() const;
+        int32_t type() const;
+        void save(const std::string& output_path) const;
+        void load(const std::string& input_path);
     private:
         bool _has_bonus;
+        int32_t _type = 1;
     };
 
     class SalesManager : public Employee {
@@ -51,14 +61,23 @@ namespace employees {
         int salary() const;
         void input(std::istream&);
         void output(std::ostream&) const;
+        int32_t sold_nm() const;
+        int32_t price() const;
+        int32_t type() const;
+        void save(const std::string& output_path) const;
+        void load(const std::string& input_path);
     private:
         int32_t _sold_nm, _price;
+        int32_t _type = 2;
+
     };
 
     class EmployeesArray {
     public:
         void add(const Employee*);
         int total_salary() const;
+        void save(const std::string& output_path);
+        void load(const std::string& input_path);
         friend std::ostream& operator<<(std::ostream&, const EmployeesArray&);
     private:
         std::vector<const Employee*> _employees;

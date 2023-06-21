@@ -55,27 +55,27 @@
 //	return stream;
 //}
 
-#include "bin_manip.h"
-#include <iostream>
-
-template <typename T>
-bin_manip::OutputManip<T> bin_manip::output(const T& v) {
-	return bin_manip::OutputManip(v);
-}
-
-template <typename T>
-bin_manip::InputManip<T> bin_manip::input(T& v) {
-	return bin_manip::InputManip(v);
-}
-
-template <typename T>
-std::ostream& operator<<(std::ostream& stream, bin_manip::OutputManip<T> out) {
-	stream.write((char*)&out.val, sizeof(T));
-	return stream;
-}
-
-template <typename T>
-std::istream& operator>>(std::istream& stream, bin_manip::InputManip<T> in) {
-	stream.read((char*)&in.val, sizeof(T));
-	return stream;
-}
+//#include "bin_manip.h"
+//#include <iostream>
+//
+//template <typename T>
+//bin_manip::OutputManip<T> bin_manip::output(const T& v) {
+//	return bin_manip::OutputManip(v);
+//}
+//
+//template <typename T>
+//bin_manip::InputManip<T> bin_manip::input(T& v) {
+//	return bin_manip::InputManip(v);
+//}
+//
+//template <typename T>
+//std::ostream& operator<<(std::ostream& stream, bin_manip::OutputManip<T> out) {
+//	stream.write((char*)&out.val, sizeof(T));
+//	return stream;
+//}
+//
+//template <typename T>
+//std::istream& operator>>(std::istream& stream, bin_manip::InputManip<T> in) {
+//	stream.read((char*)&in.val, sizeof(T));
+//	return stream;
+//}
