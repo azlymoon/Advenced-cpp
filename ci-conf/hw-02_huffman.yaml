@@ -1,0 +1,13 @@
+hw-02_huffman tests:
+  image:   rost5000/gcc-valgrind:12.2.0
+  tags:
+    - docker
+  rules:
+    - if: '$CI_COMMIT_BRANCH =~ /^hw-02_huffman.*$/'
+  before_script:
+    - !reference [.bootstrap, before_script]
+  after_script:
+    - !reference [.bootstrap, after_script]
+  script:
+    - 'chmod 700 "/tmp/ci_$CI_JOB_ID/labs/run-tests"'
+    - 'PRIVATE_SUITE_PATH="/tmp/ci_$CI_JOB_ID/private-tests/hw-02_huffman" "/tmp/ci_$CI_JOB_ID/labs/run-tests" --report --report-path tests-report.xml --output /tmp/ci_$CI_JOB_ID/output hw-02_huffman'
