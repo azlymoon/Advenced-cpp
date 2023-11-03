@@ -16,7 +16,9 @@ public:
     void move(int id, int new_x, int new_y);
 
 private:
+    Figure* find_figure(int id);
     // ...
-
+    int count_;
+    int capacity_;
     Figure** figures_; // размер массива задается в конструкторе и больше не растет
 };
