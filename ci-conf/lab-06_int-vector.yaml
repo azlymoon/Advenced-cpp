@@ -1,5 +1,6 @@
 lab-06_int-vector tests:
   image:  gcc:12.2.0
+  image:  rost5000/gcc-valgrind:12.2.0
   tags:
     - docker
   rules:

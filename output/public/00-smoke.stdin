@@ -1,0 +1,9 @@
+add 2 Joe 100 20 300
+add 1 Billy 1000 1
+list
+save ./output/public/00-smoke.tmp.bin
+add 1 Bobby 500 0
+load ./output/public/00-smoke.tmp.bin
+list
+save ./output/public/00-smoke.output.bin
+exit
