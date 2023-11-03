@@ -32,6 +32,7 @@ public:
 	 */
     void reset(Matrix* obj = nullptr);
 
+
     Matrix* operator->() const;
     Matrix& operator*() const;
 
